@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: dubbo-zookeeper-service-user
+
+# Zookeeper Server Configuration
+zookeeper:
+  server:
+    host: 192.168.0.118
+    port: 2181
+
+# Dubbo Spring Boot Externalization Configuration
+## "composite" is a new metadata type introduced since 2.7.8
+dubbo:
+  application:
+    metadata-type: composite
+  ## Base packages to scan Dubbo Component: @org.apache.dubbo.config.annotation.Service
+  scan:
+    base-packages: com.gallop.dubbo.service.impl
+## The default value of dubbo.application.name is ${spring.application.name}
+## dubbo.application.name=${spring.application.name}
+
+  ## Dubbo Protocol
+  protocol:
+    name: dubbo
+    ## Random port
+    port: -1
+    ## Dubbo Registry
+
+  registry:
+    address: zookeeper://${zookeeper.server.host}:${zookeeper.server.port}?registry-type=service
+    ## 默认超时时间5秒，时间不够会抛出zookeeper not connected 异常
+    timeout: 30000
+
+
+user:
+  service:
+    version: 1.0.0

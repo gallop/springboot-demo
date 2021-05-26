@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: dubbo-zookeeper-consumer-user
+
+# Zookeeper Server Configuration
+zookeeper:
+  server:
+    host: 192.168.0.118
+    port: 2181
+
+# Dubbo Spring Boot Externalization Configuration
+## "composite" is a new metadata type introduced since 2.7.8
+dubbo:
+  application:
+    metadata-type: composite
+
+  registry:
+    address: zookeeper://${zookeeper.server.host}:${zookeeper.server.port}?registry-type=service
+    file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache
+    timeout: 30000
+user:
+  service:
+    version: 1.0.0
