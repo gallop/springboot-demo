@@ -1,0 +1,28 @@
+spring:
+  redis:
+    cluster:
+      max-redirects: 3  # 获取失败 最大重定向次数
+      nodes:
+        - 192.168.0.118:6380
+        - 192.168.0.118:6381
+        - 192.168.0.118:6382
+        - 192.168.0.118:6383
+        - 192.168.0.118:6384
+        - 192.168.0.118:6385
+    ## 连接超时时间（毫秒）
+    timeout: 30000
+    #password:
+    lettuce:
+      pool:
+        max-active: 128 #最大活跃链接数 默认8
+        max-wait: -1 #最大等待时间（使用负值表示没有限制）
+        max-idle: 64 # 最大空闲连接数 默认8
+        min-idle: 32 #最小空闲连接数 默认0
+      shutdown-timeout: 100 # 关闭超时时间
+    #host: 192.168.0.118
+    #port: 6380
+    #password:
+
+#设置刷新间隔获取集群信息
+redis:
+  refreshTime: 5

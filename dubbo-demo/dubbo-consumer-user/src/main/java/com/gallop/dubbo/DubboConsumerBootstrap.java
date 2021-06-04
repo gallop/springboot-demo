@@ -23,7 +23,8 @@ import java.util.List;
 public class DubboConsumerBootstrap {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @DubboReference(version = "${user.service.version}")
+    //这里的负载均衡采用轮循的方式
+    @DubboReference(version = "${user.service.version}",loadbalance = "roundrobin")
     private UserService userService;
     public static void main(String[] args) {
         SpringApplication.run(DubboConsumerBootstrap.class).close();
