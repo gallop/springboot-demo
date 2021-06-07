@@ -30,3 +30,6 @@ public class WebConfig implements WebMvcConfigurer {
 
 ResponseBodyAdvice是Spring提供的高级用法，会在结果被处理前进行拦截，拦截的逻辑自己实现，这样就可以
 实现拿到结果数据进行写入缓存的操作了。
+
+### 4. redis 消息订阅发布的demo
+在RedisConfig 配置类中 添加MessageListener，指定订阅redis中 topic发布的消息，定义相关的RedisReceiver类即可。
