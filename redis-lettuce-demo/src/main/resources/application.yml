@@ -9,9 +9,17 @@ spring:
         - 192.168.0.118:6383
         - 192.168.0.118:6384
         - 192.168.0.118:6385
+    #哨兵模式，需要redis 服务启动相应的sentinel 服务
+    sentinel:
+      master: local-master
+      nodes:
+        - 192.168.0.118:26380
+        - 192.168.0.118:26381
+        - 192.168.0.118:26382
+      password: 123456
     ## 连接超时时间（毫秒）
     timeout: 30000
-    #password:
+    password: 123456
     lettuce:
       pool:
         max-active: 128 #最大活跃链接数 默认8
@@ -22,6 +30,7 @@ spring:
     #host: 192.168.0.118
     #port: 6380
     #password:
+
 
 #设置刷新间隔获取集群信息
 redis:

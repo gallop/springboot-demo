@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.redis.connection.RedisClusterConfiguration;
+import org.springframework.data.redis.connection.RedisSentinelConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -30,6 +31,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
+import java.util.HashSet;
 
 /**
  * author gallop
@@ -114,9 +116,14 @@ public class RedisConfig {
         configuration.setPort(redisProperties.getPort());
         configuration.setDatabase(redisProperties.getDatabase());
         configuration.setPassword(RedisPassword.of(redisProperties.getPassword()));
-        LettuceConnectionFactory factory = new LettuceConnectionFactory(configuration, getPoolConfig(genericPoolConfig));*/
+        LettuceConnectionFactory factory = new LettuceConnectionFactory(configuration, getPoolConfig(genericPoolConfig));
+        */
         //哨兵模式
-        //RedisSentinelConfiguration configuration1 = new RedisSentinelConfiguration();
+        RedisSentinelConfiguration configuration1 = new RedisSentinelConfiguration(redisProperties.getSentinel().getMaster(),new HashSet<>(redisProperties.getSentinel().getNodes()));
+        System.err.println("pwd:"+redisProperties.getSentinel().getPassword());
+        //当哨兵模式有密码时，需要同时设置哨兵密码，和redis master 节点的密码，切记！切记！
+        configuration1.setPassword(redisProperties.getPassword());
+        configuration1.setSentinelPassword(redisProperties.getSentinel().getPassword());
         //集群模式
         //Map<String, Object> source = new HashMap<>(8);
         //source.put("spring.redis.cluster.nodes", environment.getProperty("spring.redis.cluster.nodes"));
@@ -126,7 +133,7 @@ public class RedisConfig {
         //ClusterConfiguration.setPassword(environment.getProperty("spring.redis.password"));
 
 
-        LettuceConnectionFactory factory = new LettuceConnectionFactory(clusterConfiguration, getPoolConfig(genericPoolConfig));
+        LettuceConnectionFactory factory = new LettuceConnectionFactory(configuration1, getPoolConfig(genericPoolConfig));
         //factory.setShareNativeConnection(false);//是否允许多个线程操作共用同一个缓存连接，默认true，false时每个操作都将开辟新的连接
         return factory;
     }
