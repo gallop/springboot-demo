@@ -9,7 +9,13 @@ import com.gallop.redis.service.RedisReceiver;
 import io.lettuce.core.ReadFrom;
 import io.lettuce.core.cluster.ClusterClientOptions;
 import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
+import org.redisson.config.ReadMode;
+import org.redisson.config.SentinelServersConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -31,7 +37,10 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * author gallop
@@ -52,10 +61,38 @@ public class RedisConfig {
     @Value("${redis.refreshTime:5}")
     private int refreshTime;
 
-     /**
-      * date @2021-06-07
-      * Description: redis消息订阅发布的相关配置
-      **/
+    //Redisson 连接哨兵模式的redis需要自己配置：
+    @Bean
+    public RedissonClient redissonSentinel(){
+        Config config = new Config();
+        List<String> nodesList = redisProperties.getSentinel().getNodes();
+        //String[] address = (String[]) nodes.toArray(new String[nodes.size()]);
+        String[] nodes =(String[]) nodesList.toArray(new String[nodesList.size()]);
+        List<String> newNodes = new ArrayList(nodes.length);
+        Arrays.stream(nodes).forEach((index) -> newNodes.add(
+                index.startsWith("redis://") ? index : "redis://" + index));
+
+        SentinelServersConfig serverConfig = config.useSentinelServers()
+                .setMasterName(redisProperties.getSentinel().getMaster())
+                .addSentinelAddress(newNodes.toArray(new String[0]))
+                //.setReadMode(ReadMode.SLAVE)
+                .setTimeout((int)redisProperties.getTimeout().toMillis())
+                .setMasterConnectionPoolSize(redisProperties.getLettuce().getPool().getMaxActive())
+                .setSlaveConnectionPoolSize(redisProperties.getLettuce().getPool().getMaxActive());
+
+        if (StringUtils.isNotBlank(redisProperties.getPassword())) {
+            System.err.println("pwd:"+redisProperties.getPassword());
+            serverConfig.setPassword(redisProperties.getPassword());
+        };
+        RedissonClient client = Redisson.create(config);
+
+        return client;
+    }
+
+    /**
+     * date @2021-06-07
+     * Description: redis消息订阅发布的相关配置
+     **/
     @Bean
     RedisMessageListenerContainer container(LettuceConnectionFactory lettuceConnectionFactory,
                                             MessageListenerAdapter listenerAdapter) {

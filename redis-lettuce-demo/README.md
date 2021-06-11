@@ -42,3 +42,24 @@ ResponseBodyAdvice是Spring提供的高级用法，会在结果被处理前进�
 >另外要切换集群模式还是哨兵模式，需要修改application.yml的配置，另外要在RedisConfig.java类的getConnectionFactory 
 >方法配置对应的Configuration，有RedisStandaloneConfiguration、RedisSentinelConfiguration、RedisClusterConfiguration三种
 
+#### 5.2 使用Redisson 客户端实现分布式锁
+Redisson是基于Redis，使用Redisson之前，项目必须使用Redis,这里我们采用了Redisson的starter，
+结合SpringBoot项目，可以快速的启动，无需过多的配置(redisson 连接哨兵或集群模式需要额外编写config)。需要在pom文件中引入。
+
+```
+<!-- 分布式锁【1】引入 redisson 依赖 -->
+<dependency>
+    <groupId>org.redisson</groupId>
+    <artifactId>redisson-spring-boot-starter</artifactId>
+    <version>3.12.0</version>
+</dependency>
+```
+第二步，我们在需要使用的类中注入Redisson的客户端`RedissonClient`，如下：
+```
+//分布式锁【2】自动注入
+@Autowired
+private RedissonClient redisson;
+```
+Redisson 分布式锁例子全在ReEntrantLockTest.java 类中
+另外Redisson 官方的examples：
+https://github.com/redisson/redisson-examples

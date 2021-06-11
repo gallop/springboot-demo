@@ -1,5 +1,6 @@
 package com.gallop.redis.controller;
 
+import com.gallop.redis.lock.ReEntrantLockTest;
 import com.gallop.redis.lock.RedisLock;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class RedisLockController {
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    private ReEntrantLockTest reEntrantLockTest;
 
     @RequestMapping("/redisLock")
     public String redisLock(){
@@ -35,6 +38,15 @@ public class RedisLockController {
         }
         log.info("方法执行完成");
         return "方法执行完成";
+    }
+
+    @RequestMapping("/reentrantLock")
+    public String reentrantLock() throws InterruptedException {
+        //reEntrantLockTest.reentrantLock2();
+        //reEntrantLockTest.countDownLatchLock();
+        //reEntrantLockTest.semaphoreLock();
+        reEntrantLockTest.fairLock();
+        return "调用重入锁。";
     }
 
 
