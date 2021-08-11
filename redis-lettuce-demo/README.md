@@ -51,7 +51,7 @@ Redisson是基于Redis，使用Redisson之前，项目必须使用Redis,这里�
 <dependency>
     <groupId>org.redisson</groupId>
     <artifactId>redisson-spring-boot-starter</artifactId>
-    <version>3.12.0</version>
+    <version>3.15.5</version>
 </dependency>
 ```
 第二步，我们在需要使用的类中注入Redisson的客户端`RedissonClient`，如下：
