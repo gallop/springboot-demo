@@ -3,6 +3,150 @@
 
 一、介绍mongoDB下存储树形结构的目录文档数据
 
+数据库数据：
+
+````
+{
+    "_id" : ObjectId("61231c4b559d6043d620189e"),
+    "isFolder" : true,
+    "type" : "folder",
+    "value" : "it培训课程",
+    "size" : NumberLong(0),
+    "readCount" : 0,
+    "downCount" : 0,
+    "open" : true,
+    "date" : ISODate("2021-08-23T11:55:55.827+08:00"),
+    "_class" : "com.gallop.mongo.pojo.FileTreeNode"
+}
+{
+    "_id" : ObjectId("612335aaf6ded90fdcad9dad"),
+    "isFolder" : true,
+    "type" : "folder",
+    "value" : "java课程",
+    "size" : NumberLong(0),
+    "readCount" : 0,
+    "downCount" : 0,
+    "open" : true,
+    "date" : ISODate("2021-08-23T13:44:10.522+08:00"),
+    "parentId" : ObjectId("61231c4b559d6043d620189e"),
+    "_class" : "com.gallop.mongo.pojo.FileTreeNode"
+}
+{
+    "_id" : ObjectId("61233fd7af81f3473aa928b7"),
+    "isFolder" : true,
+    "ownId" : "ab001",
+    "type" : "folder",
+    "value" : "大数据课程",
+    "size" : NumberLong(0),
+    "readCount" : 0,
+    "downCount" : 0,
+    "open" : true,
+    "date" : ISODate("2021-08-23T14:27:35.398+08:00"),
+    "parentId" : ObjectId("61231c4b559d6043d620189e"),
+    "_class" : "com.gallop.mongo.pojo.FileTreeNode"
+}
+{
+    "_id" : ObjectId("612340290728f9263153afd7"),
+    "isFolder" : true,
+    "ownId" : "ab001",
+    "type" : "folder",
+    "value" : "springboot 入门",
+    "size" : NumberLong(0),
+    "readCount" : 0,
+    "downCount" : 0,
+    "open" : true,
+    "date" : ISODate("2021-08-23T14:28:57.574+08:00"),
+    "parentId" : ObjectId("612335aaf6ded90fdcad9dad"),
+    "_class" : "com.gallop.mongo.pojo.FileTreeNode"
+}
+{
+    "_id" : ObjectId("6123406060be7e08b5c69320"),
+    "isFolder" : true,
+    "ownId" : "ab001",
+    "type" : "folder",
+    "value" : "springCloud 进阶",
+    "size" : NumberLong(0),
+    "readCount" : 0,
+    "downCount" : 0,
+    "open" : true,
+    "date" : ISODate("2021-08-23T14:29:52.311+08:00"),
+    "parentId" : ObjectId("612335aaf6ded90fdcad9dad"),
+    "_class" : "com.gallop.mongo.pojo.FileTreeNode"
+}
+{
+    "_id" : ObjectId("6123409d896824016a74a0be"),
+    "isFolder" : true,
+    "ownId" : "ab001",
+    "type" : "folder",
+    "value" : "spark streaming 进阶",
+    "size" : NumberLong(0),
+    "readCount" : 0,
+    "downCount" : 0,
+    "open" : true,
+    "date" : ISODate("2021-08-23T14:30:53.017+08:00"),
+    "parentId" : ObjectId("61233fd7af81f3473aa928b7"),
+    "_class" : "com.gallop.mongo.pojo.FileTreeNode"
+}
+
+{
+    "_id" : ObjectId("612340bbe2d0ca7071c0c9dc"),
+    "isFolder" : true,
+    "ownId" : "ab001",
+    "type" : "folder",
+    "value" : "flink 实战",
+    "size" : NumberLong(0),
+    "readCount" : 0,
+    "downCount" : 0,
+    "open" : true,
+    "date" : ISODate("2021-08-23T14:31:23.818+08:00"),
+    "parentId" : ObjectId("61233fd7af81f3473aa928b7"),
+    "_class" : "com.gallop.mongo.pojo.FileTreeNode"
+}
+{
+    "_id" : ObjectId("6123594965ef014f4b3f1284"),
+    "isFolder" : true,
+    "ownId" : "ab001",
+    "type" : "folder",
+    "value" : "高中数学",
+    "size" : NumberLong(0),
+    "readCount" : 0,
+    "downCount" : 0,
+    "open" : true,
+    "date" : ISODate("2021-08-23T16:16:09.804+08:00"),
+    "_class" : "com.gallop.mongo.pojo.FileTreeNode"
+}
+{
+    "_id" : ObjectId("61235975295be12716a75041"),
+    "isFolder" : true,
+    "ownId" : "ab001",
+    "type" : "folder",
+    "value" : "高中几何",
+    "size" : NumberLong(0),
+    "readCount" : 0,
+    "downCount" : 0,
+    "open" : true,
+    "date" : ISODate("2021-08-23T16:16:53.180+08:00"),
+    "parentId" : ObjectId("6123594965ef014f4b3f1284"),
+    "_class" : "com.gallop.mongo.pojo.FileTreeNode"
+}
+{
+    "_id" : ObjectId("6123598903be8c7d632f8c16"),
+    "isFolder" : true,
+    "ownId" : "ab001",
+    "type" : "folder",
+    "value" : "高中代数",
+    "size" : NumberLong(0),
+    "readCount" : 0,
+    "downCount" : 0,
+    "open" : true,
+    "date" : ISODate("2021-08-23T16:17:13.721+08:00"),
+    "parentId" : ObjectId("6123594965ef014f4b3f1284"),
+    "_class" : "com.gallop.mongo.pojo.FileTreeNode"
+}
+````
+
+
+
 
 
 相关资料：
