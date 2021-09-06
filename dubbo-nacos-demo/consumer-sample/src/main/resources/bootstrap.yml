@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: dubbo-nacos-consumer-sample
+  main:
+    allow-bean-definition-overriding: true # Spring Boot 2.1 需要设定
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.132:8848
+        namespace: 19c34bb4-5434-4d6c-bb12-e551a38f57fa #34700314-bffc-4f16-bf9e-047b80253afe
+dubbo:
+  scan:
+    # dubbo 服务扫描基准包
+    base-packages: com.gallop.dubbo.nacos.provider.service
+  protocol:
+    # dubbo 协议
+    name: dubbo
+    # dubbo 协议端口
+    port: 20881
+  registry:
+    address: nacos://192.168.0.132:8848
+  application:
+    qos-enable: false #dubbo运维服务是否开启
+  consumer:
+    check: false  #启动时就否检查依赖的服务
+user:
+  service:
+    version: 1.0.0

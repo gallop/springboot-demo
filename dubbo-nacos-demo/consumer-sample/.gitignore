@@ -31,8 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-/redis-cacheable-demo/.mvn/
-/mongo-demo/.mvn/
-/spring-security-json-demo/.mvn/
-/dubbo-nacos-demo/provider-sample/.mvn/
-/dubbo-nacos-demo/consumer-sample/.mvn/

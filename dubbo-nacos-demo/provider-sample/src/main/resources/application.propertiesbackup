@@ -1,0 +1,8 @@
+# spring.cloud.nacos.discovery.server-addr= 192.168.0.132:8848
+dubbo.registry.address= nacos://127.0.0.1:8848/?username=nacos&password=nacos&registry-type=service
+dubbo.application.name=dubbo-nacos-provicer-sample
+dubbo.scan.base-packages=com.gallop.dubbo.nacos.provider.service
+dubbo.protocol.name= dubbo
+dubbo.protocol.host= 192.168.0.53
+dubbo.protocol.port= -1
+user.service.version= 1.0.0
