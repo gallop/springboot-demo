@@ -1,8 +1,9 @@
+
 spring:
   datasource:
     druid:
       #此处serverTimeZone=Asia/Shanghai无效，需要改为 serverTimezone=CTT 才有效
-      url:  jdbc:mysql://127.0.0.1:3306/file_sys?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Shanghai
+      url:  jdbc:mysql://192.168.0.118:3306/file_sys?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Shanghai
       driver-class-name:  com.mysql.cj.jdbc.Driver
       #com.mysql.cj.jdbc.Driver com.mysql.jdbc.Driver
       username:  root
@@ -29,3 +30,20 @@ spring:
   # 配置session 缓存的存储类型
   session:
     store-type: redis
+server:
+  tomcat:
+    threads:
+      #最大线程数
+      max: 200
+      #最小线程数
+      min-spare: 100
+    # 这里单位是毫秒，300000 表示300秒
+    connection-timeout: 300000
+    #最大等待队列长度
+    accept-count: 200
+    #最大链接数
+    max-connections: 8192
+    max-http-form-post-size: 2MB
+    #请请求体最大长度
+    max-swallow-size: 2MB
+    uri-encoding: UTF-8
