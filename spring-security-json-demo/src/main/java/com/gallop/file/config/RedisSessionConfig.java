@@ -1,9 +1,12 @@
 package com.gallop.file.config;
 
+import com.gallop.file.constant.SessionConstants;
+import com.gallop.file.session.CustomedSessionIdResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.session.web.http.HeaderHttpSessionIdResolver;
+import org.springframework.session.web.http.HttpSessionIdResolver;
 
 /**
  * author gallop
@@ -25,8 +28,11 @@ public class RedisSessionConfig {
       * return:
       **/
     @Bean
-    public HeaderHttpSessionIdResolver headerHttpSessionIdResolver() {
+    public HttpSessionIdResolver headerHttpSessionIdResolver() {
         //return new CookieHttpSessionIdResolver();
-        return new HeaderHttpSessionIdResolver("x-auth-token");
+        //return new HeaderHttpSessionIdResolver("x-auth-token");
+
+        //自定义的SessionIdResolver，sessionId 可放header或url的参数中
+        return new CustomedSessionIdResolver(SessionConstants.X_AUTH_TOKEN);
     }
 }
