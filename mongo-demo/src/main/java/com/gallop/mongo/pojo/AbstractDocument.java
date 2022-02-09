@@ -3,7 +3,6 @@ package com.gallop.mongo.pojo;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
-import java.math.BigInteger;
 
 /**
  * author gallop
