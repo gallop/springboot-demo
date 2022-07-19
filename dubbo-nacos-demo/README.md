@@ -16,3 +16,10 @@
 
 6、springboot 对bootstrap.yml 的读取的是优先于application.yml的，所以当启用配置中心的时候，项目的配置文件最好用bootstrap.yml 命名；
 
+nacos docker 安装指导：https://nacos.io/zh-cn/docs/quick-start-docker.html
+
+https://github.com/alibaba/spring-cloud-alibaba/blob/2.2.x/README-zh.md
+
+https://nacos.io/zh-cn/docs/what-is-nacos.html
+
+https://nacos.io/zh-cn/docs/monitor-guide.html

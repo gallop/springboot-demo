@@ -32,7 +32,7 @@ import java.time.format.DateTimeFormatter;
 
 
 @Slf4j
-@Configuration
+//@Configuration
 public class RedisConfig {
 
     @Autowired

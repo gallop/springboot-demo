@@ -26,3 +26,5 @@ dubbo:
     qos-enable: false #dubbo运维服务是否开启
   consumer:
     check: false  #启动时就否检查依赖的服务
+  provider:
+    loadbalance: roundrobin # 轮询，默认随机
